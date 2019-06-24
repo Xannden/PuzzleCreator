@@ -9,10 +9,55 @@
 
   <ItemGroup>
     <None Remove="Board.xaml" />
+    <None Remove="Icons\angle.png" />
+    <None Remove="Icons\blank.png" />
+    <None Remove="Icons\blue_crystal.png" />
+    <None Remove="Icons\cross.png" />
+    <None Remove="Icons\green_crystal.png" />
+    <None Remove="Icons\red_crystal.png" />
+    <None Remove="Icons\rune0_end.png" />
+    <None Remove="Icons\rune0_through.png" />
+    <None Remove="Icons\rune1_end.png" />
+    <None Remove="Icons\rune1_through.png" />
+    <None Remove="Icons\rune2_end.png" />
+    <None Remove="Icons\rune2_through.png" />
+    <None Remove="Icons\rune3_end.png" />
+    <None Remove="Icons\rune3_through.png" />
+    <None Remove="Icons\rune4_end.png" />
+    <None Remove="Icons\rune4_through.png" />
+    <None Remove="Icons\rune5_end.png" />
+    <None Remove="Icons\rune5_through.png" />
+    <None Remove="Icons\start.png" />
+    <None Remove="Icons\straight.png" />
+    <None Remove="Icons\t_angle.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModel\" />
+    <ProjectReference Include="..\XannLib\XannLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\angle.png" />
+    <Resource Include="Icons\blank.png" />
+    <Resource Include="Icons\blue_crystal.png" />
+    <Resource Include="Icons\cross.png" />
+    <Resource Include="Icons\green_crystal.png" />
+    <Resource Include="Icons\red_crystal.png" />
+    <Resource Include="Icons\rune0_end.png" />
+    <Resource Include="Icons\rune0_through.png" />
+    <Resource Include="Icons\rune1_end.png" />
+    <Resource Include="Icons\rune1_through.png" />
+    <Resource Include="Icons\rune2_end.png" />
+    <Resource Include="Icons\rune2_through.png" />
+    <Resource Include="Icons\rune3_end.png" />
+    <Resource Include="Icons\rune3_through.png" />
+    <Resource Include="Icons\rune4_end.png" />
+    <Resource Include="Icons\rune4_through.png" />
+    <Resource Include="Icons\rune5_end.png" />
+    <Resource Include="Icons\rune5_through.png" />
+    <Resource Include="Icons\start.png" />
+    <Resource Include="Icons\straight.png" />
+    <Resource Include="Icons\t_angle.png" />
   </ItemGroup>
 
 </Project>
