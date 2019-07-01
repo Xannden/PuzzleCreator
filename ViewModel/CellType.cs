@@ -4,6 +4,12 @@ namespace PuzzleCreator.ViewModel
 {
 	public enum CellType
 	{
+		[Icon("Empty", "Icons/empty.png")]
+		Empty,
+
+		[Icon("Cursor", "Icons/cursor.png")]
+		Cursor,
+
 		[Icon("Blank", "Icons/blank.png")]
 		Blank,
 

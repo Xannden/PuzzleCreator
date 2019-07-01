@@ -3,20 +3,91 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PuzzleCreator"
+        xmlns:vm="clr-namespace:PuzzleCreator.ViewModel"
         xmlns:view="clr-namespace:PuzzleCreator.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Background="Black">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition />
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-        <TreeView>
-            
-        </TreeView>
+        <Menu  Grid.ColumnSpan="3">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New" Click="New_Click"/>
+                <MenuItem Header="Export" Click="Export_Click"/>
+                <MenuItem Header="_Exit" Click="Exit_Click"/>
+            </MenuItem>
+            <MenuItem Header="Options">
+                <MenuItem Header="Set Title" Click="Title_Click"/>
+            </MenuItem>
+        </Menu>
         
-        <view:Board Grid.Column="1" Rows="5" Columns="5" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TreeView Grid.Row="1" Name="Tools">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate DataType="{x:Type vm:Tool}" ItemsSource="{Binding Tools}">
+                    <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
+                        <Image Width="60" 
+                               Source="{Binding Type, Converter={StaticResource CellTypeToImage}}" 
+                               RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="TreeViewItem">
+                    <Setter Property="Focusable" Value="{Binding IsLeaf}"/>
+                </Style>
+            </TreeView.ItemContainerStyle>
+
+
+            <vm:Tool Type="Cursor"/>
+            <vm:Tool Type="Blank"/>
+            <vm:Tool Type="Straight"/>
+            <vm:Tool Type="Angle"/>
+            <vm:Tool Type="TAngle"/>
+            <vm:Tool Type="Cross"/>
+            <vm:Tool Type="Start"/>
+
+            <vm:Tool Type="BlueCrystal" Name="Crystals">
+                <vm:Tool.Tools>
+                    <vm:Tool Type="BlueCrystal"/>
+                    <vm:Tool Type="RedCrystal"/>
+                    <vm:Tool Type="GreenCrystal"/>
+                </vm:Tool.Tools>
+            </vm:Tool>
+            <vm:Tool Type="Rune0End" Name="Rune Ends">
+                <vm:Tool.Tools>
+                    <vm:Tool Type="Rune0End"/>
+                    <vm:Tool Type="Rune1End"/>
+                    <vm:Tool Type="Rune2End"/>
+                    <vm:Tool Type="Rune3End"/>
+                    <vm:Tool Type="Rune4End"/>
+                    <vm:Tool Type="Rune5End"/>
+                </vm:Tool.Tools>
+            </vm:Tool>
+            <vm:Tool Type="Rune0Through" Name="Rune Through">
+                <vm:Tool.Tools>
+                    <vm:Tool Type="Rune0Through"/>
+                    <vm:Tool Type="Rune1Through"/>
+                    <vm:Tool Type="Rune2Through"/>
+                    <vm:Tool Type="Rune3Through"/>
+                    <vm:Tool Type="Rune4Through"/>
+                    <vm:Tool Type="Rune5Through"/>
+                </vm:Tool.Tools>
+            </vm:Tool>
+        </TreeView>
+
+        <GridSplitter Grid.Column="1" Grid.Row="1" Width="5" HorizontalAlignment="Stretch"/>
+
+        <view:Board x:Name="Board" Grid.Column="2" Grid.Row="1" 
+                    Rows="{Binding Rows}" Columns="{Binding Columns}"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    SelectedTool="{Binding ElementName=Tools, Path=SelectedItem}"/>
     </Grid>
 </Window>

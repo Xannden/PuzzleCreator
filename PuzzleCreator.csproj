@@ -5,6 +5,8 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
     <LangVersion>preview</LangVersion>
+    <Version>1.0.0</Version>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +15,8 @@
     <None Remove="Icons\blank.png" />
     <None Remove="Icons\blue_crystal.png" />
     <None Remove="Icons\cross.png" />
+    <None Remove="Icons\cursor.png" />
+    <None Remove="Icons\empty.png" />
     <None Remove="Icons\green_crystal.png" />
     <None Remove="Icons\red_crystal.png" />
     <None Remove="Icons\rune0_end.png" />
@@ -30,14 +34,20 @@
     <None Remove="Icons\start.png" />
     <None Remove="Icons\straight.png" />
     <None Remove="Icons\t_angle.png" />
+    <None Remove="Themes\Generic.xaml" />
+    <None Remove="View\DialogWindow.xaml" />
+    <None Remove="View\TitleWindow.xaml" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Updater\Update.csproj" />
     <ProjectReference Include="..\XannLib\XannLib.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Icons\angle.png" />
+    <Resource Include="Icons\cursor.png" />
+    <Resource Include="Icons\empty.png" />
     <Resource Include="Icons\blank.png" />
     <Resource Include="Icons\blue_crystal.png" />
     <Resource Include="Icons\cross.png" />
@@ -58,6 +68,21 @@
     <Resource Include="Icons\start.png" />
     <Resource Include="Icons\straight.png" />
     <Resource Include="Icons\t_angle.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

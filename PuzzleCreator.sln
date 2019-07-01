@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.28803.452
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PuzzleCreator", "PuzzleCreator.csproj", "{9C3CEFDD-CF65-47A6-9124-9181A309F389}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XannLib", "..\XannLib\XannLib.csproj", "{5D3F89FF-67BC-4179-843D-8754DEECBAF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XannLib", "..\XannLib\XannLib.csproj", "{5D3F89FF-67BC-4179-843D-8754DEECBAF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Update", "..\Updater\Update.csproj", "{9B3A8C7D-9DB5-4A5C-8805-AB846D9435DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{5D3F89FF-67BC-4179-843D-8754DEECBAF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D3F89FF-67BC-4179-843D-8754DEECBAF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D3F89FF-67BC-4179-843D-8754DEECBAF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B3A8C7D-9DB5-4A5C-8805-AB846D9435DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B3A8C7D-9DB5-4A5C-8805-AB846D9435DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B3A8C7D-9DB5-4A5C-8805-AB846D9435DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B3A8C7D-9DB5-4A5C-8805-AB846D9435DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

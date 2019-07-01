@@ -8,8 +8,8 @@ namespace PuzzleCreator
 {
 	public class UniformSquareGrid : Control
 	{
-		private VisualCollection visuals;
-		private List<UIElement> children = new List<UIElement>();
+		private readonly VisualCollection visuals;
+		private readonly List<UIElement> children = new List<UIElement>();
 
 		public UniformSquareGrid()
 		{
@@ -32,16 +32,22 @@ namespace PuzzleCreator
 			set => this.SetValue(ColumnsProperty, value);
 		}
 
+		public UniformSquareGridItem GetItem(int row, int column) => (UniformSquareGridItem)this.children[column + (row * (int)this.Columns)];
+
 		private static void RowColoumnChanged(object sender, DependencyPropertyChangedEventArgs e)
 		{
 			UniformSquareGrid b = sender as UniformSquareGrid;
 
-			if (b.children.Count != b.Rows * b.Columns)
-			{
-				b.children.Clear();
-				b.visuals.Clear();
+			long diff = b.children.Count - (b.Rows * b.Columns);
 
-				for (int i = 0; i < b.Rows * b.Columns; i++)
+			if (diff > 0)
+			{
+				b.children.RemoveRange(b.children.Count - (int)diff, (int)diff);
+				b.visuals.RemoveRange(b.visuals.Count - (int)diff, (int)diff);
+			}
+			else if (diff < 0)
+			{
+				for (int i = 0; i < Math.Abs(diff); i++)
 				{
 					object elem = b.CreateElement();
 
@@ -59,12 +65,15 @@ namespace PuzzleCreator
 					b.visuals.Add(item);
 				}
 			}
+
+			b.Resize();
 		}
 
-		protected virtual object CreateElement()
+		protected virtual void Resize()
 		{
-			return null;
 		}
+
+		protected virtual object CreateElement() => null;
 
 		protected override Size MeasureOverride(Size availableSize)
 		{
@@ -115,15 +124,17 @@ namespace PuzzleCreator
 
 		private Size GetCellSize(Size availableSize)
 		{
+			if (this.Columns == 0 || this.Rows == 0)
+			{
+				return new Size(0, 0);
+			}
+
 			double max = Math.Min(availableSize.Width / this.Columns, availableSize.Height / this.Rows);
 
 			return new Size(max, max);
 		}
 
-		private (int row, int column) GetPos(int index)
-		{
-			return (index / (int)this.Columns, index % (int)this.Columns);
-		}
+		private (int row, int column) GetPos(int index) => (index / (int)this.Columns, index % (int)this.Columns);
 	}
 
 	public class UniformSquareGridItem : ContentControl
