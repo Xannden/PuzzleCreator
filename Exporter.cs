@@ -28,67 +28,70 @@ namespace PuzzleCreator
 				height += 31;
 			}
 
-			using Font titleFont = new Font(new FontFamily(GenericFontFamilies.SansSerif), 15);
-			using Bitmap bitmap = new Bitmap(width, height);
-
-			using (Graphics g = Graphics.FromImage(bitmap))
+			using (Font titleFont = new Font(new FontFamily(GenericFontFamilies.SansSerif), 15))
 			{
-				int x = 0;
-				int y = 0;
-
-				if (hasTitle)
+				using (Bitmap bitmap = new Bitmap(width, height))
 				{
-					g.FillRectangle(new SolidBrush(Color.Black), new Rectangle(0, 0, width, 28));
-					g.DrawString(board.Title, titleFont, Brushes.White, new RectangleF(0, 0, width, 28), format);
-
-					g.DrawLine(new Pen(Color.Gray, 1f), 0, 28, width, 28);
-					g.DrawLine(new Pen(Color.White, 1f), 0, 29, width, 29);
-					g.DrawLine(new Pen(Color.Gray, 1f), 0, 30, width, 30);
-
-					y += 31;
-				}
-
-				for (int row = 0; row < board.Rows; row++)
-				{
-					for (int column = 0; column < board.Columns; column++)
+					using (Graphics g = Graphics.FromImage(bitmap))
 					{
-						BoardCell cell = board.GetCell(row, column);
+						int x = 0;
+						int y = 0;
 
-						if (cell.Type == CellType.Blank)
+						if (hasTitle)
 						{
-							g.FillRectangle(new SolidBrush(Color.Gray), x, y, ImageSize, ImageSize);
-							g.DrawRectangle(new Pen(Color.Black, -1), x, y, ImageSize - 1, ImageSize - 1);
+							g.FillRectangle(new SolidBrush(Color.Black), new Rectangle(0, 0, width, 28));
+							g.DrawString(board.Title, titleFont, Brushes.White, new RectangleF(0, 0, width, 28), format);
+
+							g.DrawLine(new Pen(Color.Gray, 1f), 0, 28, width, 28);
+							g.DrawLine(new Pen(Color.White, 1f), 0, 29, width, 29);
+							g.DrawLine(new Pen(Color.Gray, 1f), 0, 30, width, 30);
+
+							y += 31;
 						}
-						else if (cell.Type != CellType.Empty)
+
+						for (int row = 0; row < board.Rows; row++)
 						{
-							Image image = GetImage(cell.Type);
-
-							switch (cell.Rotation)
+							for (int column = 0; column < board.Columns; column++)
 							{
-								case 90:
-									image.RotateFlip(RotateFlipType.Rotate90FlipNone);
-									break;
+								BoardCell cell = board.GetCell(row, column);
 
-								case 180:
-									image.RotateFlip(RotateFlipType.Rotate180FlipNone);
-									break;
+								if (cell.Type == CellType.Blank)
+								{
+									g.FillRectangle(new SolidBrush(Color.Gray), x, y, ImageSize, ImageSize);
+									g.DrawRectangle(new Pen(Color.Black, -1), x, y, ImageSize - 1, ImageSize - 1);
+								}
+								else if (cell.Type != CellType.Empty)
+								{
+									Image image = GetImage(cell.Type);
 
-								case 270:
-									image.RotateFlip(RotateFlipType.Rotate270FlipNone);
-									break;
+									switch (cell.Rotation)
+									{
+										case 90:
+											image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+											break;
+
+										case 180:
+											image.RotateFlip(RotateFlipType.Rotate180FlipNone);
+											break;
+
+										case 270:
+											image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+											break;
+									}
+
+									g.DrawImage(image, x, y, ImageSize, ImageSize);
+								}
+
+								x = (x + ImageSize) % width;
 							}
 
-							g.DrawImage(image, x, y, ImageSize, ImageSize);
+							y += ImageSize;
 						}
-
-						x = (x + ImageSize) % width;
 					}
 
-					y += ImageSize;
+					bitmap.Save(file);
 				}
 			}
-
-			bitmap.Save(file);
 		}
 
 		private static Image GetImage(CellType type)
