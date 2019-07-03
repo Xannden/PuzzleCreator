@@ -10,27 +10,24 @@
         WindowStyle="None" Focusable="False" Loaded="Window_Loaded">
     <Grid Focusable="False">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="60" />
         </Grid.RowDefinitions>
 
+        <TextBlock Text="Title" HorizontalAlignment="Center" FontSize="25" Focusable="False" />
 
-        <TextBlock Text="Title" HorizontalAlignment="Center" FontSize="25" Focusable="False"/>
-
-        <TextBox Grid.Row="1" Text="{Binding BoardTitle}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" Margin="4,0,4,0"/>
+        <TextBox Grid.Row="1" Text="{Binding BoardTitle}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" Margin="4,0,4,0" />
 
         <Grid Grid.Row="3" Margin="10" Focusable="False">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="Save" Click="Create_Click" IsDefault="True"/>
-            <Button Grid.Column="2" Content="Cancel" Click="Cancel_Click" IsCancel="True"/>
+            <Button Grid.Column="0" Content="Save" Click="Create_Click" IsDefault="True" />
+            <Button Grid.Column="2" Content="Cancel" Click="Cancel_Click" IsCancel="True" />
         </Grid>
-
-
     </Grid>
 </Window>
