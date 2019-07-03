@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Update;
+
 using XannLib.Update;
 
 namespace PuzzleCreator
@@ -12,13 +12,7 @@ namespace PuzzleCreator
 	{
 		protected override void OnStartup(StartupEventArgs e)
 		{
-			Updater updater = new GithubUpdater();
-
-			if (updater.UpdateAvailable())
-			{
-				updater.Update();
-				this.Shutdown();
-			}
+			new GithubUpdater("https://raw.githubusercontent.com/Xannden/PuzzleCreator/master/UpdateInfo.json", "PuzzleCreator.exe").Run();
 
 			EventManager.RegisterClassHandler(typeof(TextBox), TextBox.GotFocusEvent, new RoutedEventHandler(this.TextBox_GotFocus));
 
