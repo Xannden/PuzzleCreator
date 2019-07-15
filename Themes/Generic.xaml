@@ -4,17 +4,21 @@
                     xmlns:converters="clr-namespace:PuzzleCreator.Converters"
                     xmlns:vm="clr-namespace:PuzzleCreator.ViewModel">
 
-    <converters:CellTypeToImageConverter x:Key="CellTypeToImage"/>
-    <converters:CellTypeToNameConverter x:Key="CellTypeToName"/>
-
+    <converters:CellTypeToImageConverter x:Key="CellTypeToImage" />
+    <converters:CellTypeToNameConverter x:Key="CellTypeToName" />
 
     <Style x:Key="HiddenButton" TargetType="Button">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate>
-                    <Border Background="Transparent">
-                        <ContentPresenter/>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="Transparent" BorderThickness="2">
+                        <ContentPresenter x:Name="Presenter" Content="{TemplateBinding Content}" Visibility="Hidden" />
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Presenter" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -24,52 +28,47 @@
         <Grid>
             <Grid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Delete" Command="{Binding DeleteCommand}"/>
+                    <MenuItem Header="Delete" Command="{Binding DeleteCommand}" />
                 </ContextMenu>
             </Grid.ContextMenu>
-            
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="4*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
 
-            <Button Grid.ColumnSpan="3" Grid.RowSpan="3" Command="{Binding MouseDownCommand}" Background="Transparent" BorderThickness="0" Style="{StaticResource HiddenButton}"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.ColumnSpan="3" Grid.RowSpan="3" Command="{Binding MouseDownCommand}" Background="Transparent" BorderThickness="0" Style="{StaticResource HiddenButton}" />
 
             <Image RenderTransformOrigin="0.5,0.5" x:Name="Image" Grid.ColumnSpan="3" Grid.RowSpan="3" Source="{Binding Type, Converter={StaticResource CellTypeToImage}}" IsHitTestVisible="False">
                 <Image.RenderTransform>
-                    <RotateTransform x:Name="test" Angle="{Binding Rotation, UpdateSourceTrigger=PropertyChanged}"/>
+                    <RotateTransform x:Name="test" Angle="{Binding Rotation, UpdateSourceTrigger=PropertyChanged}" />
                 </Image.RenderTransform>
             </Image>
 
-            <Button Grid.Row="1" Background="Transparent" BorderThickness="0" Command="{Binding RotateCounterClockwiseCommand}" Style="{StaticResource HiddenButton}"/>
-            <Button Grid.Row="1" Grid.Column="2" Background="Transparent" BorderThickness="0"  Command="{Binding RotateClockwiseCommand}" Style="{StaticResource HiddenButton}"/>
+            <Button Grid.Row="1" Background="Transparent" BorderThickness="0" Command="{Binding RotateCounterClockwiseCommand}" Style="{StaticResource HiddenButton}">
+                <Path Stroke="Black" Data="M 0 0 l 0 -25 l -3 0 l 5 -10 l 5 10 l -3 0 l 0 25 Z" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" StrokeThickness="1.5" />
+            </Button>
+            <Button Grid.Row="1" Grid.Column="2" Background="Transparent" BorderThickness="0"  Command="{Binding RotateClockwiseCommand}" Style="{StaticResource HiddenButton}">
+                <Path Stroke="Black" Data="M 0 0 l 0 25 l -3 0 l 5 10 l 5 -10 l -3 0 l 0 -25 Z" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" StrokeThickness="1.5" />
+            </Button>
         </Grid>
-        
     </DataTemplate>
 
-    
     <Style TargetType="local:UniformSquareGridItem">
-        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:UniformSquareGridItem">
-                    <Border x:Name="Grid" BorderThickness="2" >
+                    <Border x:Name="Grid" BorderThickness="2">
                         <ContentPresenter />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Grid" Property="BorderBrush" Value="LightBlue"/>
+                            <Setter TargetName="Grid" Property="BorderBrush" Value="LightBlue" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>
