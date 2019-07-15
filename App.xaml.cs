@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.IO;
+using System.Windows;
 using System.Windows.Controls;
 
 using XannLib.Update;
@@ -20,5 +22,24 @@ namespace PuzzleCreator
 		}
 
 		private void TextBox_GotFocus(object sender, RoutedEventArgs e) => (sender as TextBox)?.SelectAll();
+
+		private void Application_Startup(object sender, StartupEventArgs e)
+		{
+			if (File.Exists("errorLog.txt"))
+			{
+				File.Delete("errorLog.txt");
+			}
+		}
+
+		private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+		{
+			if (!Debugger.IsAttached)
+			{
+				File.AppendAllText("errorLog.txt", e.Exception.ToString());
+
+				MessageBox.Show("An unexpected error has occurred.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				e.Handled = true;
+			}
+		}
 	}
 }
