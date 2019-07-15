@@ -110,5 +110,10 @@ namespace PuzzleCreator
 				this.Board.Title = window.BoardTitle;
 			}
 		}
+
+		private void About_Click(object sender, RoutedEventArgs e) => _ = new AboutWindow()
+		{
+			Owner = this,
+		}.ShowDialog();
 	}
 }

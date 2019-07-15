@@ -65,6 +65,9 @@
     <Compile Include="ViewModel\CellType.cs" />
     <Compile Include="ViewModel\DelegteCommand.cs" />
     <Compile Include="ViewModel\Tool.cs" />
+    <Compile Include="View\AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Board.cs" />
     <Compile Include="View\DialogWindow.xaml.cs">
       <DependentUpon>DialogWindow.xaml</DependentUpon>
@@ -88,6 +91,10 @@
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DialogWindow.xaml">
       <SubType>Designer</SubType>
