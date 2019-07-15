@@ -178,20 +178,22 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>echo Post Build
+    <PostBuildEvent>if  $(ConfigurationName) == Publish (
+    echo Post Build
 
-echo Copying updater
-xcopy /Y D:\Code\VS\Updater\bin\Release\Updater.exe "$(TargetDir)"
+    echo Copying updater
+    xcopy /Y D:\Code\VS\Updater\bin\Release\Updater.exe "$(TargetDir)"
 
-echo Zipping files
-"C:\Program Files\7-Zip\7z.exe" a -tzip $(TargetName).zip
+    echo Zipping files
+    "C:\Program Files\7-Zip\7z.exe" a -tzip $(TargetName).zip
 
-echo Copying zip to publish folder
-xcopy /Y "$(TargetDir)$(TargetName).zip" "$(ProjectDir)Publish"
+    echo Copying zip to publish folder
+    xcopy /Y "$(TargetDir)$(TargetName).zip" "$(ProjectDir)Publish"
 
-echo Removing build files
-del "$(TargetDir)*" /Q
+    echo Removing build files
+    del "$(TargetDir)*" /Q
 
-echo Done</PostBuildEvent>
+    echo Done
+)</PostBuildEvent>
   </PropertyGroup>
 </Project>
