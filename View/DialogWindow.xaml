@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PuzzleCreator.View"
         mc:Ignorable="d"
-        Title="DialogWindow" Height="150" Width="300"
+        Title="DialogWindow" Height="160" Width="300"
         WindowStartupLocation="CenterOwner"
         WindowStyle="None" Focusable="False" Loaded="Window_Loaded">
     <Grid Focusable="False">
@@ -13,12 +13,15 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="20" />
             <RowDefinition Height="20" />
+            <RowDefinition Height="20" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
 
         <TextBlock Text="Puzzle Size" HorizontalAlignment="Center" FontSize="25" Focusable="False" />
 
-        <Grid Grid.Row="1"  HorizontalAlignment="Center"  Focusable="False">
+        <TextBlock x:Name="Error" Grid.Row="1" Text="Error: Puzzle must have less then 2,500 total tiles" HorizontalAlignment="Center" Foreground="Red" Visibility="Hidden" />
+
+        <Grid Grid.Row="2"  HorizontalAlignment="Center"  Focusable="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40" />
                 <ColumnDefinition Width="18" />
@@ -29,19 +32,19 @@
             <TextBlock Grid.Column="2" Text="Height" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="14" Focusable="False" />
         </Grid>
 
-        <Grid Grid.Row="2"   HorizontalAlignment="Center" Focusable="False">
+        <Grid Grid.Row="3"   HorizontalAlignment="Center" Focusable="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40" />
                 <ColumnDefinition Width="18" />
                 <ColumnDefinition Width="40" />
             </Grid.ColumnDefinitions>
 
-            <TextBox HorizontalContentAlignment="Right" Text="{Binding Columns}" />
+            <TextBox HorizontalContentAlignment="Right" Text="{Binding Columns, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Grid.Column="1" Text="X" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="18" Focusable="False" />
-            <TextBox Grid.Column="2" HorizontalContentAlignment="Right" Text="{Binding Rows}" />
+            <TextBox Grid.Column="2" HorizontalContentAlignment="Right" Text="{Binding Rows, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
 
-        <Grid Grid.Row="3" Margin="10" Focusable="False">
+        <Grid Grid.Row="4" Margin="10" Focusable="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="20" />

@@ -14,7 +14,17 @@ namespace PuzzleCreator.View
 			this.DataContext = this;
 		}
 
-		private void Create_Click(object sender, RoutedEventArgs e) => this.DialogResult = true;
+		private void Create_Click(object sender, RoutedEventArgs e)
+		{
+			if (this.Rows * this.Columns <= 2500)
+			{
+				this.DialogResult = true;
+			}
+			else
+			{
+				this.Error.Visibility = Visibility.Visible;
+			}
+		}
 
 		private void Cancel_Click(object sender, RoutedEventArgs e) => this.DialogResult = false;
 
